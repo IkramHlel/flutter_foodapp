@@ -28,6 +28,7 @@ class SearchRecipeBloc {
       _searchResults.stream;
   StreamSink<RecipesComplexModel> get searchResultSink => _searchResults.sink;
 
+
   void search(Map<String, String> s) async {
     if (s.keys.elementAt(0) == 'Cuisine') {
       selectedList[0] = s['Cuisine'];
@@ -36,6 +37,14 @@ class SearchRecipeBloc {
     } else if (s.keys.elementAt(0) == 'Intolerances') {
       selectedList[2] = s['Intolerances'];
     }
+    //donne le resultat correcte mais il ne l'affiche pas dans la page
+    /*RecipesComplexModel recipesComplexModel =
+        await searchService.recipeSearch(selectedList, title);
+    searchResultSink.add(recipesComplexModel);*/
+  }
+
+//affiche le premier recherche avec cuisine seulement
+  recipeSearch() async {
     RecipesComplexModel recipesComplexModel =
         await searchService.recipeSearch(selectedList, title);
     searchResultSink.add(recipesComplexModel);

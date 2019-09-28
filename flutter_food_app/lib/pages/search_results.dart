@@ -21,6 +21,7 @@ class SearchResultsPage extends StatefulWidget {
 class _SearchResultsState extends State<SearchResultsPage> {
   @override
   Widget build(BuildContext context) {
+    widget.searchRecipeBloc.recipeSearch();
     return StreamBuilder<RecipesComplexModel>(
         stream: widget.searchRecipeBloc.searchResultStream,
         builder: (context, snapshot) {

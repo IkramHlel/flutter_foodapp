@@ -14,6 +14,7 @@ class RecipesComplexModel {
       tempList.add(result);
     }
     _results = tempList;
+    print('****${_results}');
   }
 
   List<_Recipe> get results => _results;
