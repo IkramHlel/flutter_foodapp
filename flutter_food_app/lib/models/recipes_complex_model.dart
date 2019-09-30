@@ -2,26 +2,24 @@ class RecipesComplexModel {
   int _offset;
   int _number;
   int _totalResults;
-  List<_Recipe> _results = [];
+  List<Recipe> _results = [];
 
   RecipesComplexModel.fromJson(Map<String, dynamic> parsedJson) {
     _offset = parsedJson['offset'];
     _number = parsedJson['number'];
     _totalResults = parsedJson['totalResults'];
-    List<_Recipe> tempList = [];
+    List<Recipe> tempList = [];
     for (int i = 0; i < parsedJson['results'].length; i++) {
-      _Recipe result = _Recipe(parsedJson['results'][i]);
+      Recipe result = Recipe(parsedJson['results'][i]);
       tempList.add(result);
+      _results = tempList;
     }
-    _results = tempList;
-    print('****${_results}');
   }
 
-  List<_Recipe> get results => _results;
-
+ List<Recipe> get results => _results;
 }
 
-class _Recipe {
+class Recipe {
   int _id;
   int _calories;
   String _carbs;
@@ -30,7 +28,7 @@ class _Recipe {
   String _imageType;
   String _protein;
   String _title;
-  _Recipe(result) {
+  Recipe(result) {
     _id = result['id'];
     _calories = result['calories'];
     _carbs = result['carbs'];

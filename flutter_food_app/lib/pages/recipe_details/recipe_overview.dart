@@ -33,21 +33,28 @@ class _RecipeOverviewPageState extends State<RecipeOverviewPage> {
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(10.0),
-                          child:snapshot.data.title!=null || snapshot.data.title!=''? Text(
-                            snapshot.data.title,
-                            style: TextStyle(
-                                fontSize: 16.0, fontWeight: FontWeight.bold),
-                          ): '',
+                          child: snapshot.data.title != null ||
+                                  snapshot.data.title != ''
+                              ? Text(
+                                  snapshot.data.title,
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              : '',
                         ),
                         SizedBox(
                           height: 6.0,
                         ),
-                        snapshot.data.image!=null || snapshot.data.image!=''? FadeInImage(
-                          image: NetworkImage(snapshot.data.image),
-                          placeholder: AssetImage('assets/food_backgrnd.jpg'),
-                          height: 312.0,
-                          fit: BoxFit.cover,
-                        ): '',
+                        snapshot.data.image != null || snapshot.data.image != ''
+                            ? FadeInImage(
+                                image: NetworkImage(snapshot.data.image),
+                                placeholder:
+                                    AssetImage('assets/food_backgrnd.jpg'),
+                                height: 312.0,
+                                fit: BoxFit.cover,
+                              )
+                            : '',
                         Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Row(
@@ -56,10 +63,13 @@ class _RecipeOverviewPageState extends State<RecipeOverviewPage> {
                                 width: 180.0,
                                 child: Chip(
                                   avatar: Icon(Icons.person),
-                                  label: snapshot.data.servings!=null || snapshot.data.servings!=''? Text(
-                                    ' Serves ${snapshot.data.servings.toString()}',
-                                    style: TextStyle(color: Colors.black),
-                                  ):'',
+                                  label: snapshot.data.servings != null ||
+                                          snapshot.data.servings != ''
+                                      ? Text(
+                                          ' Serves ${snapshot.data.servings.toString()}',
+                                          style: TextStyle(color: Colors.black),
+                                        )
+                                      : '',
                                   backgroundColor: Colors.grey,
                                 ),
                               ),
@@ -70,10 +80,13 @@ class _RecipeOverviewPageState extends State<RecipeOverviewPage> {
                                 width: 180.0,
                                 child: Chip(
                                   avatar: Icon(Icons.access_time),
-                                  label: snapshot.data.readyInMinutes!=null || snapshot.data.readyInMinutes!=''?Text(
-                                    ' Ready in ${snapshot.data.readyInMinutes.toString()} Min',
-                                    style: TextStyle(color: Colors.black),
-                                  ):'',
+                                  label: snapshot.data.readyInMinutes != null ||
+                                          snapshot.data.readyInMinutes != ''
+                                      ? Text(
+                                          ' Ready in ${snapshot.data.readyInMinutes.toString()} Min',
+                                          style: TextStyle(color: Colors.black),
+                                        )
+                                      : '',
                                   backgroundColor: Colors.grey,
                                 ),
                               ),
@@ -88,10 +101,13 @@ class _RecipeOverviewPageState extends State<RecipeOverviewPage> {
                                 width: 180.0,
                                 child: Chip(
                                   avatar: Icon(Icons.restaurant),
-                                  label: snapshot.data.healthScore!=null || snapshot.data.healthScore!=''?Text(
-                                    '${snapshot.data.healthScore.toString()}% Health Score',
-                                    style: TextStyle(color: Colors.black),
-                                  ):'',
+                                  label: snapshot.data.healthScore != null ||
+                                          snapshot.data.healthScore != ''
+                                      ? Text(
+                                          '${snapshot.data.healthScore.toString()}% Health Score',
+                                          style: TextStyle(color: Colors.black),
+                                        )
+                                      : '',
                                   backgroundColor: Colors.grey,
                                 ),
                               ),
@@ -102,10 +118,14 @@ class _RecipeOverviewPageState extends State<RecipeOverviewPage> {
                                 width: 180.0,
                                 child: Chip(
                                   avatar: Icon(Icons.monetization_on),
-                                  label: snapshot.data.pricePerServing!=null || snapshot.data.pricePerServing!=''? Text(
-                                    '${snapshot.data.pricePerServing.toString()} Per serving',
-                                    style: TextStyle(color: Colors.black),
-                                  ):'',
+                                  label: snapshot.data.pricePerServing !=
+                                              null ||
+                                          snapshot.data.pricePerServing != ''
+                                      ? Text(
+                                          '${snapshot.data.pricePerServing.toString()} Per serving',
+                                          style: TextStyle(color: Colors.black),
+                                        )
+                                      : '',
                                   backgroundColor: Colors.grey,
                                 ),
                               ),
@@ -115,7 +135,6 @@ class _RecipeOverviewPageState extends State<RecipeOverviewPage> {
                         StreamBuilder<ProductModel>(
                             stream: widget.recipeBloc.recipeInfoStream,
                             builder: (context, snapshot) {
-                              print('****${snapshot.hasData}');
                               if (snapshot.hasData) {
                                 return Column(
                                   children: <Widget>[
@@ -125,52 +144,64 @@ class _RecipeOverviewPageState extends State<RecipeOverviewPage> {
                                       child: Row(
                                         children: <Widget>[
                                           Chip(
-                                            label: snapshot.data.calories!=null || snapshot.data.calories!=''?
-                                                 Text(
+                                            label: snapshot.data.calories !=
+                                                        null ||
+                                                    snapshot.data.calories != ''
+                                                ? Text(
                                                     '${snapshot.data.calories} Calories',
                                                     style: TextStyle(
                                                         color: Colors.black),
-                                                  ):'',
+                                                  )
+                                                : '',
                                             backgroundColor: Colors.green,
                                           ),
                                           SizedBox(
                                             width: 8.0,
                                           ),
                                           Chip(
-                                            label: snapshot.data.carbs!=null || snapshot.data.carbs!=''?Text(
-                                              '${snapshot.data.carbs} g Carbs ',
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                            ):'',
+                                            label: snapshot.data.carbs !=
+                                                        null ||
+                                                    snapshot.data.carbs != ''
+                                                ? Text(
+                                                    '${snapshot.data.carbs} g Carbs ',
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  )
+                                                : '',
                                             backgroundColor: Colors.green,
                                           ),
                                           SizedBox(
                                             width: 8.0,
                                           ),
                                           Chip(
-                                            label: snapshot.data.fat!=null || snapshot.data.fat!=''? Text(
-                                              '${snapshot.data.fat} g fat',
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                            ):'',
+                                            label: snapshot.data.fat != null ||
+                                                    snapshot.data.fat != ''
+                                                ? Text(
+                                                    '${snapshot.data.fat} g fat',
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  )
+                                                : '',
                                             backgroundColor: Colors.green,
                                           ),
                                         ],
                                       ),
                                     ),
                                     Chip(
-                                      label:snapshot.data.protein!=null|| snapshot.data.protein!=''? Text(
-                                        '${snapshot.data.protein} g Protein',
-                                        style: TextStyle(color: Colors.black),
-                                      ):'',
+                                      label: snapshot.data.protein != null ||
+                                              snapshot.data.protein != ''
+                                          ? Text(
+                                              '${snapshot.data.protein} g Protein',
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            )
+                                          : '',
                                       backgroundColor: Colors.green,
                                     ),
                                   ],
                                 );
-                              } 
-                              else {
-                                Center(child: Container());
-                                //Center(child: CircularProgressIndicator());
+                              } else {
+                                return Center(child: CircularProgressIndicator());
                               }
                             })
                       ],
@@ -179,7 +210,9 @@ class _RecipeOverviewPageState extends State<RecipeOverviewPage> {
                 ],
               ),
             );
-          } 
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
         });
   }
 }

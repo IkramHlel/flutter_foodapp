@@ -5,6 +5,7 @@ import 'package:flutter_food_app/blocs/search_recipe_bloc.dart';
 import 'package:flutter_food_app/pages/search_admin.dart';
 import '../widgets/search_card.dart';
 import '../pages/search_results.dart';
+import '../models/recipes_complex_model.dart';
 
 class SearchRecipePage extends StatefulWidget {
   final String title;
@@ -77,7 +78,6 @@ class _SearchRecipePageState extends State<SearchRecipePage> {
     double maxValue = 0.8;
     RangeValues _values = RangeValues(minValue, maxValue);
     SearchRecipeBloc searchRecipeBloc = SearchRecipeBloc(widget.title);
-
     return WillPopScope(
       onWillPop: () {
         Navigator.of(context).push(MaterialPageRoute(
@@ -86,7 +86,8 @@ class _SearchRecipePageState extends State<SearchRecipePage> {
       },
       child: Scaffold(
         appBar: AppBar(title: Text('Search Recipes:  ${widget.title}')),
-        body: ListView(children: <Widget>[
+        body: ListView(
+          children: <Widget>[
             SearchCard('Cuisine', _cuisine, searchRecipeBloc),
             SearchCard('Diet', _diet, searchRecipeBloc),
             SearchCard('Intolerances', _intolerances, searchRecipeBloc),
@@ -151,17 +152,29 @@ class _SearchRecipePageState extends State<SearchRecipePage> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(10.0)),
-                  child: FlatButton(
-                      textColor: Colors.green,
-                      child: Text(
-                        'Go!',
-                        style: TextStyle(fontSize: 18.0),
-                      ),
-                      onPressed: () {
-                        //searchRecipeBloc.recipeSearch();
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                SearchResultsPage(widget.title)));
+                  child: StreamBuilder<RecipesComplexModel>(
+                      stream: searchRecipeBloc.searchResultStream,
+                      builder: (context, snapshot) {
+                        return FlatButton(
+                            textColor: Colors.green,
+                            child: Text(
+                              'Go!',
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                            onPressed: () {
+                              if (snapshot.data != null) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        SearchResultsPage(widget.title,
+                                            snapshot.data.results)));
+                              } else {
+                                List<Recipe> results = [];
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        SearchResultsPage(
+                                            widget.title, results)));
+                              }
+                            });
                       }),
                 ),
               ),

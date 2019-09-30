@@ -3,6 +3,7 @@ import 'package:flutter_food_app/blocs/recipe_bloc.dart';
 import 'dart:math';
 
 import '../../models/ingredient_model.dart';
+
 class RecipeIngredientsPage extends StatefulWidget {
   int id;
   RecipeBloc recipeBloc;
@@ -22,6 +23,7 @@ class _RecipeIngredientsPageState extends State<RecipeIngredientsPage> {
     return StreamBuilder<IngredientModel>(
         stream: widget.recipeBloc.ingredientStream,
         builder: (context, snapshot) {
+          print('**${snapshot.hasData}');
           if (snapshot.hasData) {
             return Scaffold(
               body: ListView.builder(

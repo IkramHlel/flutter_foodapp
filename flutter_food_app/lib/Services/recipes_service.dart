@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/recipes_model.dart';
 class RecipesService{
-  final _apiKey = '4c5b564b9ef74baeae8700c6c760c6c4';
+  final _apiKey = '226be7def33241d68846ca9aca2b046d';
 
     Future<RecipesModel> fetchRecipes() async {
 
     final http.Response response = await http.get(
-        'https://api.spoonacular.com/recipes/search?number=20&apiKey=${_apiKey}');
+        'https://api.spoonacular.com/recipes/search?number=20&apiKey=$_apiKey');
         //print(response.body.toString());
     json.decode(response.body);
      if (response.statusCode == 200){
