@@ -17,12 +17,12 @@ class RecipeBloc {
   final _recipe = PublishSubject<RecipeModel>();
   Observable<RecipeModel> get recipeStream => _recipe.stream;
   StreamSink<RecipeModel> get recipeSink => _recipe.sink;
-//********************* */
+  
   fetchRecipeInfo() async {
     RecipeModel recipeModel = await recipeService.fetchRecipeInfo(recipeId);
     recipeSink.add(recipeModel);
   }
-//**************** */
+
   final _recipeInfo = PublishSubject<ProductModel>();
   Observable<ProductModel> get recipeInfoStream => _recipeInfo.stream;
   StreamSink<ProductModel> get recipeInfoSink => _recipeInfo.sink;

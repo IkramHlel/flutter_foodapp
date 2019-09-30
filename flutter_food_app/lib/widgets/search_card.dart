@@ -98,7 +98,6 @@ class _SearchCardState extends State<SearchCard> {
                           ),
                           onTap: () {
                             if (_active) {
-                              print(_active);
                               _onSelected(index);
                               _sink.add({widget.title: widget.list[index]});
                             }

@@ -59,8 +59,8 @@ class RecipeService {
   Future<InstructionModel> fetchRecipeInstructions(int recipeId) async {
     final http.Response response = await http.get(
         'https://api.spoonacular.com/recipes/${recipeId.toString()}/analyzedInstructions?apiKey=$_apiKey');
-   
-    print(json.decode(response.body));
+    
+    print('steps: ${json.decode(response.body)}');
     if (response.statusCode == 200) {
       return InstructionModel.fromJson(json.decode(response.body));
     } else {

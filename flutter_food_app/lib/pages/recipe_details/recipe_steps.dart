@@ -21,29 +21,34 @@ class _RecipeStepsPageState extends State<RecipeStepsPage> {
     return StreamBuilder<InstructionModel>(
       stream: widget.recipeBloc.instructionStream,
       builder: (context, snapshot) {
+        print('has data: ${snapshot.hasData}');
         if (snapshot.hasData) {
           return Scaffold(
             body: ListView.builder(
                 itemCount: snapshot.data.instructionList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ListView.builder(
-                    itemCount:
-                        snapshot.data.instructionList[index].steps.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        child: Chip(
-                          label: Text(
-                              '${snapshot.data.instructionList[index].steps[index].number}) ${snapshot.data.instructionList[index].steps[index].step}'),
-                        ),
-                      );
-                    },
-                  );
+                  print('**${snapshot.data.instructionList.length}');
+                  if (snapshot.data.instructionList.length != 0) {
+                    return ListView.builder(
+                      itemCount:
+                          snapshot.data.instructionList[index].steps.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          child: Chip(
+                            label: Text(
+                                '${snapshot.data.instructionList[index].steps[index].number}) ${snapshot.data.instructionList[index].steps[index].step}'),
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return Scaffold(
+                        body: Container(child: Text('No steps Found')));
+                  }
                 }),
           );
         } else {
-          return Scaffold(
-            body: Container(child: Text('No steps Found')),
-          );
+          return Center(child: CircularProgressIndicator());
         }
       },
     );

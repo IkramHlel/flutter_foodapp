@@ -23,9 +23,6 @@ class SearchService{
     Future<RecipesComplexModel> recipeSearch(List selectedList,title) async {
     final http.Response response = await http.get(
           'https://api.spoonacular.com/recipes/complexSearch?query=$title&cuisine=${selectedList[0]}&diet=${selectedList[1]}&intolerances=${selectedList[2]}&apiKey=$_apiKey');
-        print('****************');
-        print(response.body.toString());
-        print('****************');
      if (response.statusCode == 200){
         return RecipesComplexModel.fromJson( json.decode(response.body));
       } else {

@@ -23,8 +23,6 @@ class SearchResultsPage extends StatefulWidget {
 class _SearchResultsState extends State<SearchResultsPage> {
   @override
   Widget build(BuildContext context) {
-    print('**${widget._results}');
-    print(widget._results != []);
     if (widget._results != null) {
       return Scaffold(
         drawer: SlideDrawer(context),
@@ -79,7 +77,6 @@ class _SearchResultsState extends State<SearchResultsPage> {
             }),
       );
     } else {
-      print('else');
       return Scaffold(
         drawer: SlideDrawer(context),
         appBar: AppBar(

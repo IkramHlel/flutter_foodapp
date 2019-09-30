@@ -3,9 +3,11 @@ class InstructionModel{
 
  InstructionModel.fromJson(List<dynamic> parsedJson){
  List<_Instructions> tempList = [];
- print('length');
- print(parsedJson.length);
-    for (int i = 0; i < parsedJson.length; i++) {
+ print('*********');
+ print(parsedJson[0].length);
+ print(parsedJson[0][0]);
+  print('*********');
+    for (int i = 0; i < parsedJson[0].length; i++) {
       _Instructions result = _Instructions(parsedJson[0][i]);
       tempList.add(result);
     }
