@@ -51,5 +51,6 @@ class SearchRecipeBloc {
     _cuisineSearch.close();
     _dietSearch.close();
     _intoleranceSearch.close();
+    _searchResults.close();
   }
 }

@@ -1,9 +1,10 @@
 class IngredientModel {
   List<_Ingredient> _ingredientList = [];
+
   IngredientModel.fromJson(Map<String, dynamic> parsedJson) {
     List<_Ingredient> tempList = [];
-    for (int i = 0; i < parsedJson['results'].length; i++) {
-      _Ingredient result = _Ingredient(parsedJson[i]);
+    for (int i = 0; i < parsedJson['ingredients'].length; i++) {
+      _Ingredient result = _Ingredient(parsedJson['ingredients'][i]);
       tempList.add(result);
     }
     _ingredientList = tempList;
@@ -20,12 +21,12 @@ class _Ingredient {
     _name = result['name'];
     _amount = {
       'metric': {
-        'unit': result['amount']['unit'],
-        'value': result['amount']['value'],
+        'unit': result['amount']['metric']['unit'],
+        'value': result['amount']['metric']['value'],
       },
       'us': {
-        'unit': result['us']['unit'],
-        'value': result['us']['value'],
+        'unit': result['amount']['us']['unit'],
+        'value': result['amount']['us']['value'],
       },
     };
   }

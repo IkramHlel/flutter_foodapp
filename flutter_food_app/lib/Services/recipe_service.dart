@@ -10,7 +10,7 @@ import '../models/product_model.dart';
 import 'package:flutter_food_app/models/summary_recipe_model.dart';
 
 class RecipeService {
-  final _apiKey = '226be7def33241d68846ca9aca2b046d';
+  final _apiKey = '5a69cf1ea96f413b8b6099b2a9a04e45';
   Map<String, dynamic> recipeData = {};
 
   Future<RecipeModel> fetchRecipeInfo(int recipeId) async {
@@ -49,7 +49,6 @@ class RecipeService {
   Future<IngredientModel> fetchRecipeIngredients(int recipeId) async {
     final http.Response response = await http.get(
         'https://api.spoonacular.com/recipes/${recipeId.toString()}//ingredientWidget.json?apiKey=$_apiKey');
-    print(response.body.toString());
     if (response.statusCode == 200) {
       return IngredientModel.fromJson(json.decode(response.body));
     } else {
@@ -60,7 +59,8 @@ class RecipeService {
   Future<InstructionModel> fetchRecipeInstructions(int recipeId) async {
     final http.Response response = await http.get(
         'https://api.spoonacular.com/recipes/${recipeId.toString()}/analyzedInstructions?apiKey=$_apiKey');
-    print(response.body.toString());
+   
+    print(json.decode(response.body));
     if (response.statusCode == 200) {
       return InstructionModel.fromJson(json.decode(response.body));
     } else {

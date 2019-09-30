@@ -23,7 +23,6 @@ class _RecipeIngredientsPageState extends State<RecipeIngredientsPage> {
     return StreamBuilder<IngredientModel>(
         stream: widget.recipeBloc.ingredientStream,
         builder: (context, snapshot) {
-          print('**${snapshot.hasData}');
           if (snapshot.hasData) {
             return Scaffold(
               body: ListView.builder(
@@ -35,9 +34,10 @@ class _RecipeIngredientsPageState extends State<RecipeIngredientsPage> {
                       label: Row(
                         children: <Widget>[
                           Image(
-                              image: NetworkImage(
-                            'https://spoonacular.com/cdn/ingredients_100x100/${snapshot.data.ingredientList[index].image}',
-                          )),
+                            image: NetworkImage(
+                              'https://spoonacular.com/cdn/ingredients_100x100/${snapshot.data.ingredientList[index].image}',
+                            ),
+                          ),
                           Text(
                             '   ${snapshot.data.ingredientList[index].value} ${snapshot.data.ingredientList[index].unit} ${snapshot.data.ingredientList[index].name}',
                             style: TextStyle(fontSize: 16.0),
@@ -50,7 +50,7 @@ class _RecipeIngredientsPageState extends State<RecipeIngredientsPage> {
               ),
             );
           } else {
-            Scaffold(
+            return Scaffold(
               body: Center(child: CircularProgressIndicator()),
             );
           }

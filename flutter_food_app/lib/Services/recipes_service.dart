@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/recipes_model.dart';
 class RecipesService{
-  final _apiKey = '226be7def33241d68846ca9aca2b046d';
+  final _apiKey = '5a69cf1ea96f413b8b6099b2a9a04e45';
 
     Future<RecipesModel> fetchRecipes() async {
 

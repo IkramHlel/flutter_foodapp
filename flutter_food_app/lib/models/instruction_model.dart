@@ -1,10 +1,12 @@
 class InstructionModel{
  List<_Instructions> _instructionList = [];
 
- InstructionModel.fromJson(Map<String,dynamic> parsedJson){
+ InstructionModel.fromJson(List<dynamic> parsedJson){
  List<_Instructions> tempList = [];
+ print('length');
+ print(parsedJson.length);
     for (int i = 0; i < parsedJson.length; i++) {
-      _Instructions result = _Instructions(parsedJson[i]);
+      _Instructions result = _Instructions(parsedJson[0][i]);
       tempList.add(result);
     }
     _instructionList = tempList;
