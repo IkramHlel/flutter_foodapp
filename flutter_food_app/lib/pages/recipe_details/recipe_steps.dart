@@ -25,7 +25,7 @@ class _RecipeStepsPageState extends State<RecipeStepsPage> {
         if (snapshot.hasData) {
           return Scaffold(
             body: ListView.builder(
-                itemCount: snapshot.data.instructionList.length,
+                itemCount: snapshot.data.instructionList.length != null ?snapshot.data.instructionList.length:0,
                 itemBuilder: (BuildContext context, int index) {
                   print('**${snapshot.data.instructionList.length}');
                   if (snapshot.data.instructionList.length != 0) {
