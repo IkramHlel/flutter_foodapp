@@ -6,6 +6,10 @@ class SearchCard extends StatefulWidget {
   final String title;
   final List list;
   SearchRecipeBloc searchRecipeBloc;
+    bool _active = false;
+
+    bool get active => _active;
+
 
   SearchCard(this.title, this.list, this.searchRecipeBloc);
 
@@ -17,7 +21,6 @@ class SearchCard extends StatefulWidget {
 
 class _SearchCardState extends State<SearchCard> {
   int _selectedIndex;
-  bool _active = false;
   double _opacity = 0.3;
 
   _onSelected(int index) {
@@ -48,13 +51,13 @@ class _SearchCardState extends State<SearchCard> {
               child: Column(
                 children: <Widget>[
                   SwitchListTile(
-                    value: _active,
+                    value: widget._active,
                     onChanged: (bool value) {
                       setState(() {
-                        _active = value;
-                        if (_active) {
+                        widget._active = value;
+                        if (widget._active) {
                           _opacity = 1;
-                        } else if (!_active) {
+                        } else if (!widget._active) {
                           _opacity = 0.3;
                         }
                       });
@@ -81,7 +84,7 @@ class _SearchCardState extends State<SearchCard> {
                                   child: Chip(
                                     backgroundColor: _selectedIndex != null &&
                                             _selectedIndex == index &&
-                                            _active != false
+                                            widget._active != false
                                         ? Colors.green
                                         : Colors.black,
                                     label: Text(
@@ -97,7 +100,7 @@ class _SearchCardState extends State<SearchCard> {
                             ),
                           ),
                           onTap: () {
-                            if (_active) {
+                            if (widget._active) {
                               _onSelected(index);
                               _sink.add({widget.title: widget.list[index]});
                             }

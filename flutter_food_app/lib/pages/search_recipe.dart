@@ -92,7 +92,7 @@ class _SearchRecipePageState extends State<SearchRecipePage> {
         appBar: AppBar(title: Text('Search Recipes:  ${widget.title}')),
         body: ListView(
           children: <Widget>[
-            SearchCard('Cuisine', _cuisine, searchRecipeBloc),
+           SearchCard('Cuisine', _cuisine, searchRecipeBloc),
             SearchCard('Diet', _diet, searchRecipeBloc),
             SearchCard('Intolerances', _intolerances, searchRecipeBloc),
             Padding(
