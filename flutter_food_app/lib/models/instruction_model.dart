@@ -33,8 +33,7 @@ class _Instruction {
   int _number;
   String _step;
   _Instruction(instruction) {
-    print(instruction[0]);
-    _step = instruction[0];
+    _step = instruction['step'];
     _number = instruction['number'];
 
     List<_Equipment> equipmentList = [];

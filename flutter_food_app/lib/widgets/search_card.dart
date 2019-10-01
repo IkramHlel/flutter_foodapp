@@ -54,7 +54,7 @@ class _SearchCardState extends State<SearchCard> {
                         _active = value;
                         if (_active) {
                           _opacity = 1;
-                        } else if(!_active){
+                        } else if (!_active) {
                           _opacity = 0.3;
                         }
                       });

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_app/blocs/recipes_bloc.dart';
 
 import 'package:flutter_food_app/blocs/search_recipe_bloc.dart';
 
@@ -78,6 +79,9 @@ class _SearchRecipePageState extends State<SearchRecipePage> {
     double maxValue = 0.8;
     RangeValues _values = RangeValues(minValue, maxValue);
     SearchRecipeBloc searchRecipeBloc = SearchRecipeBloc(widget.title);
+    RecipesBloc recipesBloc = RecipesBloc();
+    recipesBloc.fetchRecipesByQuery(widget.title);
+
     return WillPopScope(
       onWillPop: () {
         Navigator.of(context).push(MaterialPageRoute(
@@ -144,41 +148,80 @@ class _SearchRecipePageState extends State<SearchRecipePage> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(right: 20.0, top: 10.0),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: StreamBuilder<RecipesComplexModel>(
-                      stream: searchRecipeBloc.searchResultStream,
-                      builder: (context, snapshot) {
-                        return FlatButton(
-                            textColor: Colors.green,
-                            child: Text(
-                              'Go!',
-                              style: TextStyle(fontSize: 18.0),
-                            ),
-                            onPressed: () {
-                              if (snapshot.data != null) {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        SearchResultsPage(widget.title,
-                                            snapshot.data.results)));
-                              } else {
-                                List<Recipe> results = [];
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        SearchResultsPage(
-                                            widget.title, results)));
-                              }
-                            });
-                      }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(right: 20.0, top: 10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10.0)),
+                    child: StreamBuilder<RecipesComplexModel>(
+                        stream: searchRecipeBloc.searchResultStream,
+                        builder: (context, snapshot) {
+                          return FlatButton(
+                              textColor: Colors.green,
+                              child: Text(
+                                'Go!',
+                                style: TextStyle(fontSize: 18.0),
+                              ),
+                              onPressed: () {
+                                if (snapshot.data != null) {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          SearchResultsPage(widget.title,
+                                              snapshot.data.results)));
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('An error occured!'),
+                                          content: Text('Please select !'),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              child: Text('Okay'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            )
+                                          ],
+                                        );
+                                      });
+                                }
+                              });
+                        }),
+                  ),
                 ),
-              ),
-            )
+                Padding(
+                  padding: EdgeInsets.only(right: 20.0, top: 10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10.0)),
+                    child: StreamBuilder<RecipesComplexModel>(
+                        stream: recipesBloc.recipesByQueryStream,
+                        builder: (context, snapshot) {
+                          return FlatButton(
+                              textColor: Colors.green,
+                              child: Text(
+                                'Skip it',
+                                style: TextStyle(fontSize: 18.0),
+                              ),
+                              onPressed: () {
+                                if (snapshot.data != null) {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          SearchResultsPage(widget.title,
+                                              snapshot.data.results)));
+                                }
+                              });
+                        }),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

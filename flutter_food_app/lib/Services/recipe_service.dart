@@ -10,7 +10,7 @@ import '../models/product_model.dart';
 import 'package:flutter_food_app/models/summary_recipe_model.dart';
 
 class RecipeService {
-  final _apiKey = '5a69cf1ea96f413b8b6099b2a9a04e45';
+  final _apiKey = 'dd9e54f7a2f848d0b8b4c979a88e2a05';
   Map<String, dynamic> recipeData = {};
 
   Future<RecipeModel> fetchRecipeInfo(int recipeId) async {
